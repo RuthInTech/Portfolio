@@ -53,8 +53,7 @@ export default function Contact() {
       if (response.ok && data.success) {
         setFeedback({
           type: 'success',
-          text: data.message || 'Thank you! Your message has been saved successfully.',
-          persistedTo: data.persistedTo,
+          text: data.message || 'Thank you! Your message has been sent successfully.',
         });
         setFormData({
           name: '',
@@ -293,29 +292,18 @@ export default function Contact() {
                 {/* Feedback message banner */}
                 {feedback && (
                   <div
-                    className={`p-4 rounded-xl text-xs sm:text-sm flex flex-col gap-1.5 ${
+                    className={`p-4 rounded-xl text-xs sm:text-sm flex items-center gap-2 font-medium ${
                       feedback.type === 'success'
                         ? 'bg-emerald-50 text-emerald-900 border border-emerald-200'
-                        : feedback.type === 'info'
-                        ? 'bg-amber-50 text-amber-900 border border-amber-300'
                         : 'bg-rose-50 text-rose-900 border border-rose-200'
                     }`}
                   >
-                    <div className="flex items-center gap-2 font-semibold">
-                      {feedback.type === 'success' ? (
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                      ) : feedback.type === 'info' ? (
-                        <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
-                      ) : (
-                        <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
-                      )}
-                      <span>{feedback.text}</span>
-                    </div>
-                    {feedback.persistedTo && (
-                      <span className="text-[11px] text-emerald-700 pl-6 font-mono">
-                        ✓ Stored in {feedback.persistedTo}
-                      </span>
+                    {feedback.type === 'success' ? (
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    ) : (
+                      <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
                     )}
+                    <span>{feedback.text}</span>
                   </div>
                 )}
 

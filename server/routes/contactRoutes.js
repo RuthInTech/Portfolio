@@ -59,8 +59,7 @@ router.post('/', async (req, res) => {
 
     res.status(201).json({
       success: true,
-      message: 'Thank you! Your message has been saved successfully.',
-      persistedTo: dbStatus.connected ? 'MongoDB' : 'In-Memory Store',
+      message: 'Thank you! Your message has been sent successfully.',
       data: savedContact,
     });
   } catch (error) {
