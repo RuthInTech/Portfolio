@@ -12,10 +12,14 @@ import CurrentlyLearning from './components/CurrentlyLearning';
 import BunaCorner from './components/BunaCorner';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import CoffeeCursor from './components/CoffeeCursor';
 
 export default function App() {
   return (
     <div className="min-h-screen bg-[#FDFBF7] text-[#2E1E14] font-sans selection:bg-[#EBDDCB] selection:text-[#2E1E14]">
+      {/* ☕ Fluid Coffee-themed Cursor Follower */}
+      <CoffeeCursor />
+
       {/* Sticky frosted coffee bar */}
       <Navbar />
 
