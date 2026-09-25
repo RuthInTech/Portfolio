@@ -1,8 +1,25 @@
-import React from 'react';
-import { ArrowDown, ArrowUpRight, Code2, Figma, Sparkles, Coffee, Heart, Terminal, Compass, Laptop } from 'lucide-react';
-import { personalInfo } from '../data/portfolioData';
+import React, { useState } from 'react';
+import { 
+  ArrowDown, 
+  Code2, 
+  Figma, 
+  Sparkles, 
+  Coffee, 
+  Laptop, 
+  Compass, 
+  ExternalLink, 
+  Github, 
+  FolderGit2, 
+  Plus, 
+  Info 
+} from 'lucide-react';
+import { personalInfo, heroProjectLinks } from '../data/portfolioData';
+import ruthPhoto from '../assets/image.png';
 
 export default function Hero() {
+  const [showHelper, setShowHelper] = useState(false);
+  const photoSrc = ruthPhoto || personalInfo.photoUrl || '/image.png';
+
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-grid-warm">
       {/* Warm Ambient Coffee Glows */}
@@ -10,9 +27,9 @@ export default function Hero() {
       <div className="absolute top-10 right-10 w-72 h-72 bg-[#E7D7C1]/30 rounded-full blur-2xl pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
           
-          {/* Left Column: Ruth's Intro & Positioning */}
+          {/* Left Column: Ruth's Intro, Actions & Direct Project Links */}
           <div className="lg:col-span-7 space-y-6 text-left">
             
             {/* Live Status Pill */}
@@ -40,19 +57,27 @@ export default function Hero() {
               </h1>
             </div>
 
-            {/* Professional Role Title */}
-            <div className="flex flex-wrap items-center gap-2 pt-1">
+            {/* Professional Role Title with Quick Avatar Icon */}
+            <div className="flex flex-wrap items-center gap-2.5 pt-1">
+              <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-[#C88346] bg-[#FAF6F0] shrink-0 shadow-sm ring-2 ring-[#EFE6DA]">
+                <img 
+                  src={photoSrc} 
+                  alt={personalInfo.name} 
+                  className="w-full h-full object-cover object-top"
+                  onError={(e) => { e.currentTarget.src = '/image.png'; }}
+                />
+              </div>
               <span className="text-lg md:text-xl font-medium text-[#463020]">
-                Ruth — <span className="text-[#2E1E14] font-semibold">Frontend &amp; Design Developer</span>
+                {personalInfo.name} — <span className="text-[#2E1E14] font-semibold">{personalInfo.title}</span>
               </span>
               <span className="px-2.5 py-0.5 rounded-md bg-[#EFE6DA] text-[#61442E] text-xs font-mono font-medium">
-                MERN • Vue • Flutter • Figma
+                MERN • React • Flutter • Figma
               </span>
             </div>
 
             {/* Authentic Bio Voice */}
             <p className="text-base sm:text-lg text-[#61442E] leading-relaxed max-w-2xl">
-              I like building things that start as an idea, a Figma frame, or a problem someone keeps running into — and turning them into something people can actually use.
+              {personalInfo.statement}
             </p>
 
             {/* Core Intersection Pills */}
@@ -74,13 +99,13 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Actions & Links */}
-            <div className="flex flex-wrap items-center gap-4 pt-3">
+            {/* Actions & Social Links */}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
               <a
                 href="#projects"
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm bg-[#2E1E14] text-[#FAF6F0] hover:bg-[#463020] hover:shadow-warm-lg transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0"
               >
-                <span>View Featured Projects</span>
+                <span>Explore All Projects</span>
                 <ArrowDown className="w-4 h-4 text-[#C88346]" />
               </a>
 
@@ -92,9 +117,9 @@ export default function Hero() {
                 <span>Let's Talk</span>
               </a>
 
-              <div className="flex items-center gap-2 pl-2">
+              <div className="flex items-center gap-2 pl-1">
                 <a
-                  href="https://github.com/RuthInTech"
+                  href={personalInfo.socials.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 rounded-xl bg-[#FAF6F0] border border-[#E2D3C0] text-[#463020] hover:text-[#2E1E14] hover:border-[#BA9B7B] transition-colors"
@@ -106,7 +131,7 @@ export default function Hero() {
                   </svg>
                 </a>
                 <a
-                  href="https://linkedin.com/in/ruth-software-engineer"
+                  href={personalInfo.socials.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 rounded-xl bg-[#FAF6F0] border border-[#E2D3C0] text-[#463020] hover:text-[#2E1E14] hover:border-[#BA9B7B] transition-colors"
@@ -120,9 +145,134 @@ export default function Hero() {
               </div>
             </div>
 
+            {/* ── HERO PROJECT LINKS SECTION ── */}
+            <div className="pt-6 border-t border-[#E2D3C0]">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <FolderGit2 className="w-4 h-4 text-[#C88346]" />
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#463020]">
+                    Direct Project Links &amp; Demos
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowHelper(!showHelper)}
+                  className="text-[11px] text-[#7F5E42] hover:text-[#2E1E14] flex items-center gap-1 font-medium transition-colors"
+                  title="How to manage project links"
+                >
+                  <Info className="w-3.5 h-3.5 text-[#C88346]" />
+                  <span>How to link projects</span>
+                </button>
+              </div>
+
+              {/* Helper notice if toggled */}
+              {showHelper && (
+                <div className="mb-4 p-3.5 rounded-xl bg-[#FAF6F0] border border-[#D2BBA0] text-xs text-[#61442E] space-y-1.5 animate-fadeIn">
+                  <div className="font-semibold text-[#2E1E14] flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-[#C88346]" />
+                    <span>How to add or update your project links:</span>
+                  </div>
+                  <p>
+                    Open <code className="px-1.5 py-0.5 rounded bg-[#EFE6DA] text-[#463020] font-mono text-[11px]">src/data/portfolioData.js</code> and edit the <code className="px-1.5 py-0.5 rounded bg-[#EFE6DA] text-[#463020] font-mono text-[11px]">heroProjectLinks</code> array.
+                  </p>
+                  <p className="text-[11px] text-[#7F5E42]">
+                    Each entry accepts <code className="font-mono">title</code>, <code className="font-mono">liveUrl</code>, <code className="font-mono">githubUrl</code>, <code className="font-mono">tech</code>, and <code className="font-mono">badge</code>.
+                  </p>
+                </div>
+              )}
+
+              {/* Grid of Direct Project Link Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {heroProjectLinks.map((project) => (
+                  <div
+                    key={project.id}
+                    className="group relative p-3.5 rounded-xl bg-[#FAF6F0] border border-[#E2D3C0] hover:border-[#BA9B7B] hover:shadow-warm transition-all duration-200 text-left flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-1.5 mb-1">
+                        <span className="font-semibold text-xs text-[#2E1E14] group-hover:text-[#7F5E42] transition-colors truncate">
+                          {project.title}
+                        </span>
+                        <span className="px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-[#F4EBD9] text-[#61442E] border border-[#E2D3C0] shrink-0">
+                          {project.badge}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-[#7F5E42] line-clamp-1 mb-2">
+                        {project.tagline}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center justify-between pt-2 border-t border-[#EFE6DA] mt-1">
+                      <span className="text-[10px] text-[#9C7A5B] font-mono truncate max-w-[120px]">
+                        {project.tech}
+                      </span>
+                      
+                      {/* Action Links */}
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        {project.liveUrl ? (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[11px] font-semibold bg-[#2E1E14] text-[#FAF6F0] hover:bg-[#C88346] transition-colors"
+                            title={`Open live demo of ${project.title}`}
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#7FA075] animate-pulse"></span>
+                            <span>Live</span>
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        ) : (
+                          <span 
+                            className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-medium bg-[#EFE6DA] text-[#9C7A5B] cursor-not-allowed"
+                            title="Add liveUrl in src/data/portfolioData.js"
+                          >
+                            <span>Live pending</span>
+                          </span>
+                        )}
+
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-1.5 rounded-md bg-[#F7F2EA] text-[#463020] hover:bg-[#EFE6DA] hover:text-[#2E1E14] border border-[#E2D3C0] transition-colors"
+                            title={`View ${project.title} on GitHub`}
+                          >
+                            <Github className="w-3.5 h-3.5" />
+                          </a>
+                        )}
+
+                        <a
+                          href={`#projects`}
+                          className="p-1.5 rounded-md bg-[#F7F2EA] text-[#463020] hover:bg-[#EFE6DA] hover:text-[#2E1E14] border border-[#E2D3C0] transition-colors"
+                          title="View case study details"
+                        >
+                          <ArrowDown className="w-3.5 h-3.5" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                {/* Slot to guide adding more project links */}
+                <div 
+                  onClick={() => setShowHelper(true)}
+                  className="p-3.5 rounded-xl border border-dashed border-[#D2BBA0] bg-[#FAF6F0]/60 hover:bg-[#FAF6F0] hover:border-[#BA9B7B] transition-all cursor-pointer flex flex-col items-center justify-center text-center group min-h-[92px]"
+                >
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-[#7F5E42] group-hover:text-[#2E1E14]">
+                    <Plus className="w-4 h-4 text-[#C88346] group-hover:scale-110 transition-transform" />
+                    <span>Link Another Project</span>
+                  </div>
+                  <p className="text-[11px] text-[#9C7A5B] mt-0.5">
+                    Configure links in <code className="font-mono text-[10px] text-[#61442E]">portfolioData.js</code>
+                  </p>
+                </div>
+              </div>
+            </div>
+
           </div>
 
-          {/* Right Column: Interactive Coffee-Themed Code & Design Card */}
+          {/* Right Column: Interactive Coffee-Themed Code & Design Card WITH INTEGRATED PHOTO */}
           <div className="lg:col-span-5 relative">
             
             {/* Decorative background blur ring */}
@@ -147,36 +297,82 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Code Snippet in Warm Coffee Aesthetic */}
-              <div className="rounded-xl bg-[#2E1E14] text-[#FAF6F0] p-4 font-mono text-xs leading-relaxed overflow-x-auto shadow-inner-warm">
-                <div className="text-[#BA9B7B]">// Ruth's Developer DNA</div>
-                <div className="mt-1">
-                  <span className="text-[#C88346]">const</span>{' '}
-                  <span className="text-[#FAF6F0]">developer</span> = {'{'}
+              {/* Code Snippet in Warm Coffee Aesthetic WITH EMBEDDED PHOTO */}
+              <div className="rounded-xl bg-[#2E1E14] text-[#FAF6F0] p-4 sm:p-5 font-mono text-xs leading-relaxed shadow-inner-warm text-left space-y-3.5">
+                
+                {/* File Header Comment */}
+                <div className="flex items-center justify-between text-[#BA9B7B] text-[11px] border-b border-[#463020] pb-2.5">
+                  <span className="flex items-center gap-1.5">
+                    <span className="text-[#C88346]">✦</span> // Ruth's Developer Workspace
+                  </span>
+                  <span className="text-[#C88346] font-mono text-[10px] px-2 py-0.5 rounded bg-[#FAF6F0]/10 border border-[#463020]">
+                    AAU • Year 4
+                  </span>
                 </div>
-                <div className="pl-4 text-[#E7D7C1]">
-                  name: <span className="text-[#C88346]">'Ruth'</span>,
+
+                {/* Picture & Code in Side-by-Side Flex Layout */}
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 pt-1">
+                  
+                  {/* Ruth's Photo Frame */}
+                  <div className="relative group shrink-0">
+                    <div className="w-36 h-48 sm:w-40 sm:h-52 rounded-xl overflow-hidden border-2 border-[#C88346] shadow-xl bg-[#1A100A] relative ring-2 ring-[#463020]">
+                      <img 
+                        src={photoSrc} 
+                        alt={personalInfo.name} 
+                        className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                        onError={(e) => { e.currentTarget.src = '/image.png'; }}
+                      />
+                      {/* Code-style overlay badge at bottom of photo */}
+                      <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#1A100A]/95 via-[#2E1E14]/80 to-transparent pt-4 pb-1.5 px-2 text-center">
+                        <div className="text-[11px] text-[#FAF6F0] font-sans font-bold leading-tight">
+                          Ruth
+                        </div>
+                        <div className="text-[9px] text-[#C88346] font-mono leading-tight">
+                          &lt;FrontendDev /&gt;
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Code syntax lines */}
+                  <div className="flex-1 min-w-0 space-y-1 text-left text-[11px] sm:text-xs overflow-x-auto">
+                    <div>
+                      <span className="text-[#C88346]">const</span>{' '}
+                      <span className="text-[#FAF6F0]">developer</span> = {'{'}
+                    </div>
+                    <div className="pl-3 sm:pl-4 text-[#E7D7C1]">
+                      name: <span className="text-[#C88346]">'Ruth'</span>,
+                    </div>
+                    <div className="pl-3 sm:pl-4 text-[#E7D7C1] truncate">
+                      photo: <span className="text-[#C88346]">'assets/image.png'</span>,
+                    </div>
+                    <div className="pl-3 sm:pl-4 text-[#E7D7C1]">
+                      school: <span className="text-[#C88346]">'Addis Ababa Univ'</span>,
+                    </div>
+                    <div className="pl-3 sm:pl-4 text-[#E7D7C1]">
+                      focus: <span className="text-[#C88346]">'Frontend × UI/UX'</span>,
+                    </div>
+                    <div className="pl-3 sm:pl-4 text-[#E7D7C1]">
+                      stack: <span className="text-[#C88346]">'React • Node • MERN'</span>,
+                    </div>
+                    <div className="pl-3 sm:pl-4 text-[#E7D7C1]">
+                      ethiopianCoffee: <span className="text-[#E09A55]">true</span>,
+                    </div>
+                    <div className="pl-3 sm:pl-4 text-[#E7D7C1]">
+                      motto: <span className="text-[#C88346]">'Build real things'</span>,
+                    </div>
+                    <div className="pl-3 sm:pl-4 text-[#E7D7C1]">
+                      bridge: () =&gt; {'{'}
+                    </div>
+                    <div className="pl-6 sm:pl-7 text-[#9C7A5B]">
+                      <span className="text-[#C88346]">Figma.to(React);</span>
+                    </div>
+                    <div className="pl-3 sm:pl-4 text-[#E7D7C1]">{'}'}</div>
+                    <div>{'}'};</div>
+                  </div>
+
                 </div>
-                <div className="pl-4 text-[#E7D7C1]">
-                  school: <span className="text-[#C88346]">'Addis Ababa University'</span>,
-                </div>
-                <div className="pl-4 text-[#E7D7C1]">
-                  focus: <span className="text-[#C88346]">'Frontend × UI/UX × MERN'</span>,
-                </div>
-                <div className="pl-4 text-[#E7D7C1]">
-                  ethiopianCoffee: <span className="text-[#E09A55]">true</span>,
-                </div>
-                <div className="pl-4 text-[#E7D7C1]">
-                  motto: <span className="text-[#C88346]">'Build real things, learn by doing'</span>,
-                </div>
-                <div className="pl-4 text-[#E7D7C1]">
-                  bridgeDesignAndCode: () =&gt; {'{'}
-                </div>
-                <div className="pl-8 text-[#9C7A5B]">
-                  return <span className="text-[#C88346]">Figma.translateTo(React, Vue, Flutter);</span>
-                </div>
-                <div className="pl-4 text-[#E7D7C1]">{'}'}</div>
-                <div>{'}'};</div>
+
               </div>
 
               {/* Mini Highlights Footer inside card */}
@@ -197,7 +393,7 @@ export default function Hero() {
                     <span>Code Execution</span>
                   </div>
                   <p className="text-[11px] text-[#7F5E42] mt-1 leading-snug">
-                    React, Vue, MERN stack &amp; Flutter mobile apps.
+                    React, MERN stack &amp; Flutter mobile apps.
                   </p>
                 </div>
               </div>

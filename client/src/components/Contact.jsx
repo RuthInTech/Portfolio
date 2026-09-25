@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Send, Github, Linkedin, MapPin, Coffee, Sparkles, CheckCircle2, AlertCircle, Copy, Check } from 'lucide-react';
+import { Mail, Send, Github, Linkedin, MapPin, Coffee, Sparkles, CheckCircle2, AlertCircle, Copy, Check, ExternalLink } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
 export default function Contact() {
@@ -15,15 +15,25 @@ export default function Contact() {
   const [feedback, setFeedback] = useState(null);
   const [copiedEmail, setCopiedEmail] = useState(false);
 
+  const recipientEmail = personalInfo.emailDelivery?.toEmail || personalInfo.socials.email;
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText(personalInfo.socials.email);
+    navigator.clipboard.writeText(recipientEmail);
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2000);
   };
+
+  // Pre-formatted mailto & Gmail URLs
+  const mailtoSubject = encodeURIComponent(formData.subject || `Portfolio Message from ${formData.name || 'Visitor'}`);
+  const mailtoBody = encodeURIComponent(
+    `Hi Ruth,\n\n${formData.message || ''}\n\nSender: ${formData.name || ''} (${formData.email || ''})\nCoffee Preference: ${formData.coffeeRoast}`
+  );
+  const directMailto = `mailto:${recipientEmail}?subject=${mailtoSubject}&body=${mailtoBody}`;
+  const gmailWebLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipientEmail}&su=${mailtoSubject}&body=${mailtoBody}`;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +41,7 @@ export default function Contact() {
     setFeedback(null);
 
     try {
+      // Send directly to Express backend (/api/contact) to save in MongoDB
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -42,7 +53,7 @@ export default function Contact() {
       if (response.ok && data.success) {
         setFeedback({
           type: 'success',
-          text: data.message || 'Message sent successfully! Ruth will get back to you shortly.',
+          text: data.message || 'Thank you! Your message has been saved successfully.',
           persistedTo: data.persistedTo,
         });
         setFormData({
@@ -52,25 +63,18 @@ export default function Contact() {
           coffeeRoast: 'Yirgacheffe (Floral & Bright)',
           message: '',
         });
-      } else {
-        setFeedback({
-          type: 'error',
-          text: data.error || 'Something went wrong. Please try again.',
-        });
+        return;
       }
-    } catch (error) {
-      // In case client is running without backend proxy during test
+
       setFeedback({
-        type: 'success',
-        text: 'Thank you for reaching out! (Note: Local demo mode registered your message).',
-        persistedTo: 'Local Fallback',
+        type: 'error',
+        text: data.error || 'Could not save your message. You can reach out directly via email.',
       });
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        coffeeRoast: 'Yirgacheffe (Floral & Bright)',
-        message: '',
+    } catch (error) {
+      console.error('Contact submit error:', error);
+      setFeedback({
+        type: 'error',
+        text: 'Server is currently offline. Please use Open in Gmail or Mail App below.',
       });
     } finally {
       setIsSubmitting(false);
@@ -108,7 +112,7 @@ export default function Contact() {
               </h3>
               
               <p className="text-sm text-[#61442E] leading-relaxed">
-                I am actively seeking <strong className="text-[#2E1E14]">Frontend &amp; UI/UX Engineering Internships</strong> and student developer collaborations. I reply within 24-48 hours.
+                I am actively seeking <strong className="text-[#2E1E14]">Frontend &amp; UI/UX Engineering Internships</strong> and student developer collaborations. Drop a note below or reach out directly—I reply within 24-48 hours.
               </p>
 
               {/* Email Card with Copy button */}
@@ -118,10 +122,13 @@ export default function Contact() {
                     <Mail className="w-4 h-4" />
                   </div>
                   <div className="truncate">
-                    <div className="text-[11px] text-[#7F5E42] uppercase font-mono">Email Address</div>
-                    <div className="text-xs sm:text-sm font-semibold text-[#2E1E14] truncate font-mono">
-                      {personalInfo.socials.email}
-                    </div>
+                    <div className="text-[11px] text-[#7F5E42] uppercase font-mono">Personal Email</div>
+                    <a 
+                      href={`mailto:${recipientEmail}`}
+                      className="text-xs sm:text-sm font-semibold text-[#2E1E14] hover:text-[#C88346] truncate font-mono block transition-colors"
+                    >
+                      {recipientEmail}
+                    </a>
                   </div>
                 </div>
 
@@ -163,30 +170,26 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Location Badge */}
-              <div className="pt-3 border-t border-[#E2D3C0] flex items-center justify-between text-xs text-[#7F5E42]">
-                <div className="flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-[#C88346]" />
-                  <span>Addis Ababa, Ethiopia</span>
+              {/* Addis Ababa Location & Response Time */}
+              <div className="p-4 rounded-2xl bg-gradient-to-br from-[#F7F2EA] to-[#EFE6DA] border border-[#D2BBA0] space-y-2">
+                <div className="flex items-center gap-2 text-xs font-semibold text-[#2E1E14]">
+                  <MapPin className="w-4 h-4 text-[#C88346]" />
+                  <span>Based in Addis Ababa, Ethiopia</span>
                 </div>
-                <span className="font-mono text-[11px] text-[#BA9B7B]">AAU Software Engineering</span>
+                <p className="text-xs text-[#61442E]">
+                  Available for remote internships worldwide and local on-site opportunities in Addis Ababa.
+                </p>
+                <div className="flex items-center gap-1.5 pt-1 text-[11px] text-[#7F5E42] font-mono">
+                  <Coffee className="w-3.5 h-3.5 text-[#C88346]" />
+                  <span>Inbox Delivery: rteklu582@gmail.com</span>
+                </div>
               </div>
-            </div>
 
-            {/* Coffee Invitation Callout */}
-            <div className="p-5 rounded-2xl bg-gradient-to-br from-[#F4EBD9] to-[#FAF6F0] border border-[#D2BBA0] flex items-center gap-3 text-xs text-[#463020]">
-              <div className="w-9 h-9 rounded-xl bg-[#C88346]/20 flex items-center justify-center shrink-0">
-                <Coffee className="w-4 h-4 text-[#8C5326]" />
-              </div>
-              <div>
-                <strong className="text-[#2E1E14]">Always up for a chat: </strong>
-                Whether discussing state management libraries, reviewing Figma frames, or sharing tech stories.
-              </div>
             </div>
 
           </div>
 
-          {/* Right Column: Working MERN Contact Form */}
+          {/* Right Column: Direct Email Contact Form */}
           <div className="lg:col-span-7">
             <div className="p-6 sm:p-8 rounded-3xl bg-[#FAF6F0] border border-[#E2D3C0] shadow-warm space-y-6">
               
@@ -196,12 +199,12 @@ export default function Contact() {
                     Send Ruth a Message
                   </h3>
                   <p className="text-xs text-[#7F5E42] mt-0.5">
-                    Powered by Express + MongoDB backend
+                    Messages are delivered directly to <span className="font-semibold text-[#2E1E14] font-mono">{recipientEmail}</span>
                   </p>
                 </div>
-                <div className="flex items-center gap-1 text-[11px] font-mono text-[#5D7E54]">
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#F7F2EA] text-[11px] font-mono text-[#5D7E54] border border-[#E2D3C0]">
                   <span className="w-2 h-2 rounded-full bg-[#5D7E54] animate-pulse"></span>
-                  <span>Form Active</span>
+                  <span>Email Direct</span>
                 </div>
               </div>
 
@@ -217,14 +220,14 @@ export default function Contact() {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="e.g. Liya Kebede"
+                      placeholder="e.g. Bethlehem, Alex"
                       className="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F2EA] border border-[#E2D3C0] text-sm text-[#2E1E14] placeholder-[#BA9B7B] focus:outline-none focus:ring-2 focus:ring-[#C88346]"
                     />
                   </div>
 
                   <div>
                     <label className="block text-xs font-semibold text-[#61442E] mb-1">
-                      Email Address *
+                      Your Email Address *
                     </label>
                     <input
                       type="email"
@@ -232,7 +235,7 @@ export default function Contact() {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="your.email@example.com"
+                      placeholder="you@company.com"
                       className="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F2EA] border border-[#E2D3C0] text-sm text-[#2E1E14] placeholder-[#BA9B7B] focus:outline-none focus:ring-2 focus:ring-[#C88346]"
                     />
                   </div>
@@ -290,36 +293,63 @@ export default function Contact() {
                 {/* Feedback message banner */}
                 {feedback && (
                   <div
-                    className={`p-4 rounded-xl text-xs sm:text-sm flex flex-col gap-1 ${
+                    className={`p-4 rounded-xl text-xs sm:text-sm flex flex-col gap-1.5 ${
                       feedback.type === 'success'
                         ? 'bg-emerald-50 text-emerald-900 border border-emerald-200'
+                        : feedback.type === 'info'
+                        ? 'bg-amber-50 text-amber-900 border border-amber-300'
                         : 'bg-rose-50 text-rose-900 border border-rose-200'
                     }`}
                   >
                     <div className="flex items-center gap-2 font-semibold">
                       {feedback.type === 'success' ? (
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                      ) : feedback.type === 'info' ? (
+                        <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
                       ) : (
-                        <AlertCircle className="w-4 h-4 text-rose-600" />
+                        <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
                       )}
                       <span>{feedback.text}</span>
                     </div>
                     {feedback.persistedTo && (
-                      <span className="text-[11px] text-[#7F5E42] pl-6 font-mono">
-                        Storage: {feedback.persistedTo}
+                      <span className="text-[11px] text-emerald-700 pl-6 font-mono">
+                        ✓ Stored in {feedback.persistedTo}
                       </span>
                     )}
                   </div>
                 )}
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-semibold text-sm bg-[#2E1E14] text-[#FAF6F0] hover:bg-[#463020] hover:shadow-warm transition-all disabled:opacity-50"
-                >
-                  <Send className="w-4 h-4 text-[#C88346]" />
-                  <span>{isSubmitting ? 'Sending Message...' : 'Send Message to Ruth'}</span>
-                </button>
+                {/* Action buttons */}
+                <div className="flex flex-col sm:flex-row items-center gap-2.5 pt-1">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full sm:flex-1 inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl font-semibold text-sm bg-[#2E1E14] text-[#FAF6F0] hover:bg-[#463020] hover:shadow-warm transition-all disabled:opacity-50"
+                  >
+                    <Send className="w-4 h-4 text-[#C88346]" />
+                    <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                  </button>
+
+                  <a
+                    href={gmailWebLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 py-3 px-4 rounded-xl font-semibold text-xs sm:text-sm bg-[#F7F2EA] text-[#463020] border border-[#D2BBA0] hover:bg-[#EFE6DA] hover:text-[#2E1E14] transition-all whitespace-nowrap"
+                    title="Open draft directly in Gmail Web"
+                  >
+                    <ExternalLink className="w-4 h-4 text-[#C88346]" />
+                    <span>Open in Gmail</span>
+                  </a>
+
+                  <a
+                    href={directMailto}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 py-3 px-4 rounded-xl font-semibold text-xs sm:text-sm bg-[#F7F2EA] text-[#463020] border border-[#D2BBA0] hover:bg-[#EFE6DA] hover:text-[#2E1E14] transition-all whitespace-nowrap"
+                    title="Open in your default Mail app"
+                  >
+                    <Mail className="w-4 h-4 text-[#C88346]" />
+                    <span>Mail App</span>
+                  </a>
+                </div>
               </form>
 
             </div>

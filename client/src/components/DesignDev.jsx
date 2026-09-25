@@ -155,18 +155,18 @@ export default function DesignDev() {
                   </div>
                 </div>
                 <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#463020] text-[#E7D7C1]">
-                  Vue / React + Tailwind
+                  React + Tailwind
                 </span>
               </div>
 
               {/* Code Snippet */}
               <div className="p-4 rounded-2xl bg-[#1A100A] border border-[#463020] font-mono text-xs leading-relaxed overflow-x-auto text-[#E7D7C1]">
-                <div className="text-[#BA9B7B]">// Translating Figma token to Vue 3 / React component</div>
+                <div className="text-[#BA9B7B]">// Translating Figma token to React component</div>
                 <div>
                   <span className="text-[#C88346]">export function</span>{' '}
                   <span className="text-[#FAF6F0]">BakeryCard</span>({'{'} item, onAddToCart {'}'}) {'{'}
                 </div>
-                <div className="pl-4 text-[#BA9B7B]">const cartStore = useCartStore();</div>
+                <div className="pl-4 text-[#BA9B7B]">const &#123; addToCart &#125; = useCart();</div>
                 <div className="pl-4 mt-1">
                   <span className="text-[#C88346]">return</span> (
                 </div>

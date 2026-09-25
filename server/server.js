@@ -9,11 +9,12 @@ import projectRoutes from './routes/projectRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
 import coffeeRoutes from './routes/coffeeRoutes.js';
 
-// Load environment variables from .env
-dotenv.config();
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Explicitly load environment variables from server/.env, then fallback to root
+dotenv.config({ path: path.join(__dirname, '.env') });
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -24,7 +25,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // Database connection initialization
-connectDB();
+await connectDB();
 
 // API Routes
 app.use('/api/projects', projectRoutes);

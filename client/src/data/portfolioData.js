@@ -8,12 +8,23 @@ export const personalInfo = {
   tagline: 'I build interfaces where thoughtful design meets functional code.',
   statement:
     'I like building things that start as an idea, a Figma frame, or a problem someone keeps running into — and turning them into something people can actually use.',
-  bio: `I am a 4th-year Software Engineering student at Addis Ababa University with a deep focus on frontend development, UI/UX, and design-driven engineering. My passion lives at the intersection of how an application looks, feels, and works under the hood. Rather than sticking purely to theory, I thrive by designing interfaces in Figma and writing clean, reactive code across React, Vue, Flutter, and the MERN stack.`,
+  bio: `I am a 4th-year Software Engineering student at Addis Ababa University with a deep focus on frontend development, UI/UX, and design-driven engineering. My passion lives at the intersection of how an application looks, feels, and works under the hood. Rather than sticking purely to theory, I thrive by designing interfaces in Figma and writing clean, reactive code across React, Flutter, and the MERN stack.`,
+  // ── PHOTO CONFIGURATION ──────────────────────────────────────────────────
+  // User photo from assets folder
+  photoUrl: '/image.png',
   socials: {
     github: 'https://github.com/RuthInTech',
-    linkedin: 'https://linkedin.com/in/ruth-software-engineer', // placeholder as requested
-    email: 'ruth.tech.builds@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/ruth-seifu-19467b371/',
+    email: 'rteklu582@gmail.com',
     portfolioUrl: 'https://ruth-portfolio.vercel.app',
+  },
+  // ── EMAIL DELIVERY CONFIGURATION ─────────────────────────────────────────
+  // Contact form messages are delivered directly to this email:
+  emailDelivery: {
+    toEmail: 'rteklu582@gmail.com',
+    // Optional: To receive emails directly from Vercel without running a Node backend,
+    // paste a free Web3Forms Access Key from https://web3forms.com
+    web3FormsKey: '',
   },
   currentFocus: [
     'Deepening React & MERN stack component architecture',
@@ -22,11 +33,57 @@ export const personalInfo = {
   ],
 };
 
+// ── HERO FEATURED PROJECT LINKS ──────────────────────────────────────────
+// Direct project links shown in the Hero section.
+// Add, edit, or remove your project links and live demo URLs below!
+export const heroProjectLinks = [
+  {
+    id: 'pick-one-cause',
+    title: 'Pick One Cause',
+    tagline: 'Social-Impact Cause Discovery & Engagement Platform',
+    badge: 'Social Impact',
+    tech: 'React • Tailwind • REST',
+    liveUrl: '', // Add your live deployment link here (e.g. 'https://pickonecause.vercel.app')
+    githubUrl: 'https://github.com/RuthInTech',
+    accentColor: '#C88346',
+  },
+  {
+    id: 'crust-and-crumbs',
+    title: 'Crust & Crumbs',
+    tagline: 'Artisanal Bakery Ordering System — Figma to Code',
+    badge: 'Internship Prototype',
+    tech: 'React • Tailwind • Vite',
+    liveUrl: 'https://internship-prototype-ashy.vercel.app/',
+    githubUrl: 'https://github.com/RuthInTech',
+    accentColor: '#BA9B7B',
+  },
+  {
+    id: 'queueless',
+    title: 'Queueless',
+    tagline: 'Smart Queue Management for Physical Waiting Lines',
+    badge: 'Hackathon (MERN)',
+    tech: 'MongoDB • Express • React • Node',
+    liveUrl: '', // Add live link when deployed
+    githubUrl: 'https://github.com/RuthInTech',
+    accentColor: '#7F5E42',
+  },
+  {
+    id: 'flutter-weather-app',
+    title: 'Flutter Weather App',
+    tagline: 'Real-Time Atmospheric Forecast & Adaptive UI',
+    badge: 'Cross-Platform Mobile',
+    tech: 'Flutter • Dart • OpenWeather',
+    liveUrl: 'https://weather-app-six-sigma-70.vercel.app/',
+    githubUrl: 'https://github.com/RuthInTech',
+    accentColor: '#5D7E54',
+  },
+];
+
 export const skillsData = {
   frontend: [
-    { name: 'React', level: 'Core Stack', desc: 'Building modular component trees, hooks, and responsive interfaces' },
-    { name: 'Vue.js', level: 'Core Stack', desc: 'Reactive composition API, single-file components, routing' },
-    { name: 'Pinia', level: 'State Management', desc: 'Centralized reactive store, cart state & sync' },
+    { name: 'React', level: 'Core Stack', desc: 'Building modular component trees, custom hooks, and responsive interfaces' },
+    { name: 'Next.js', level: 'Framework', desc: 'Server components, client-side routing, and optimized web apps' },
+    { name: 'State Management (Redux / Context)', level: 'State Architecture', desc: 'Predictable state flow, context providers, and action workflows' },
     { name: 'JavaScript (ES6+)', level: 'Core Language', desc: 'Modern async/await, closures, DOM manipulation' },
     { name: 'HTML5 & Semantic Markup', level: 'Foundation', desc: 'Accessible structures, semantic hierarchy, SEO' },
     { name: 'CSS3 & Responsive Design', level: 'Styling Craft', desc: 'Flexbox, CSS Grid, animations, mobile-first design' },
@@ -100,31 +157,31 @@ export const featuredProjects = [
   {
     id: 'crust-and-crumbs',
     title: 'Crust & Crumbs',
-    tagline: 'Artisanal Bakery Ordering System — From Figma to Vue.js',
+    tagline: 'Artisanal Bakery Ordering System — From Figma to Production UI',
     category: 'Internship',
     badge: 'Figma to Code Prototype',
     description:
-      'A warm, visually appealing bakery ordering prototype created during an internship assignment. Demonstrates end-to-end execution: UI/UX design in Figma turned into a responsive Vue.js + Pinia app.',
+      'A warm, visually appealing bakery ordering prototype created during an internship assignment. Demonstrates end-to-end execution: UI/UX design in Figma turned into a responsive modern web application.',
     fullStory:
-      'Created as an internship prototype assignment to demonstrate how modern frontend engineering and thoughtful UI design merge. Ruth conceptualized the brand aesthetic in Figma — warm bakery aromas, tactile product cards, intuitive category selectors — and then engineered the entire application in Vue 3 with Pinia state management.',
+      'Created as an internship prototype assignment to demonstrate how modern frontend engineering and thoughtful UI design merge. Ruth conceptualized the brand aesthetic in Figma — warm bakery aromas, tactile product cards, intuitive category selectors — and then engineered the entire application with modular state management and responsive component architecture.',
     problemStatement:
       'Local artisanal bakeries struggle with generic ordering platforms that fail to convey the warmth, freshness, and craft of their baked goods while complicating mobile ordering.',
     solutionApproach:
-      'Engineered a cozy, responsive web app with a reactive Pinia cart drawer, real-time total calculation, search filter, and reusable Vue components deployed live on Vercel.',
+      'Engineered a cozy, responsive web app with a reactive cart drawer, real-time total calculation, search filter, and reusable modern components deployed live on Vercel.',
     keyFeatures: [
       'Bakery hero section with warm atmosphere and brand story',
       'Category-based menu browsing and real-time search',
-      'Pinia-powered reactive shopping cart with item quantity updates and total calculation',
+      'Reactive shopping cart with item quantity updates and total calculation',
       'Smooth drawer animations and tactile micro-interactions',
       'Responsive mobile navigation tailored for effortless one-handed ordering',
     ],
-    technologies: ['Vue.js', 'Pinia', 'JavaScript', 'Figma', 'Vite', 'CSS3'],
+    technologies: ['React', 'JavaScript', 'Tailwind CSS', 'Figma', 'Vite', 'CSS3'],
     githubUrl: 'https://github.com/RuthInTech',
     liveUrl: 'https://internship-prototype-ashy.vercel.app/',
     figmaMockup: 'Full Bakery Design System & Component Library in Figma',
     highlights: [
-      'UI/UX Design in Figma to Pixel-Perfect Vue Code',
-      'State Management with Pinia Store',
+      'UI/UX Design in Figma to Pixel-Perfect Code',
+      'State Management & Reactive Cart Store',
       'Live Production Deployment on Vercel',
     ],
     coffeeVibe: 'Sidama Medium Roast — Sweet pastry notes, warm & comforting',
@@ -255,9 +312,9 @@ export const labExperiments = [
     type: 'Frontend',
   },
   {
-    title: 'Vue 3 + Pinia State Experiments',
-    description: 'Testing store mutations, getters, action workflows, and persistent local storage sync.',
-    tech: ['Vue 3', 'Pinia', 'Vite'],
+    title: 'React State & Context Experiments',
+    description: 'Testing custom hooks, reducer patterns, action workflows, and persistent local storage sync.',
+    tech: ['React', 'Custom Hooks', 'Vite'],
     status: 'Lab Project',
     type: 'Frontend',
   },
@@ -297,11 +354,11 @@ export const experiences = [
       'Focused on taking product concepts from initial Figma wireframes to full functional frontend prototypes, specifically delivering the Crust & Crumbs bakery ordering system.',
     bullets: [
       'Crafted high-fidelity UI/UX mockups, typography systems, and interaction flows in Figma',
-      'Architected reusable component hierarchy using Vue.js 3 and Vite for high performance',
-      'Implemented Pinia reactive state store to manage multi-item cart states, quantity mutations, and totals',
+      'Architected reusable component hierarchy using React and Vite for high performance',
+      'Implemented responsive state management to handle multi-item cart states, quantity mutations, and totals',
       'Turned complex product requirements into an intuitive, responsive prototype deployed live on Vercel',
     ],
-    tags: ['Vue.js', 'Pinia', 'Figma', 'Vite', 'Component Architecture', 'Vercel'],
+    tags: ['React', 'Tailwind CSS', 'Figma', 'Vite', 'Component Architecture', 'Vercel'],
   },
   {
     role: 'BSc in Software Engineering (4th Year)',
@@ -313,7 +370,7 @@ export const experiences = [
       'Pursuing software engineering with academic rigor in data structures, algorithms, software architecture, database management, and web engineering.',
     bullets: [
       'Active participant in university developer communities, peer study groups, and hackathons',
-      'Bridging academic software principles with modern industry web frameworks (MERN, Vue, Flutter)',
+      'Bridging academic software principles with modern industry web frameworks (MERN, React, Flutter)',
       'Mentoring junior students in web fundamentals and UI design principles',
     ],
     tags: ['Software Engineering', 'Algorithms', 'Databases', 'Web Architecture', 'AAU'],

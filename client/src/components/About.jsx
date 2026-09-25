@@ -7,7 +7,7 @@ export default function About() {
     {
       icon: Layers,
       title: 'Frontend Engineering',
-      desc: 'Translating concepts into clean, reusable component trees with React, Vue, and Flutter. Passionate about state management, snappy performance, and accessible responsive layouts.',
+      desc: 'Translating concepts into clean, reusable component trees with React, Tailwind, and Flutter. Passionate about state management, snappy performance, and accessible responsive layouts.',
       tag: 'Code & Architecture',
     },
     {
@@ -68,7 +68,7 @@ export default function About() {
             </p>
 
             <p className="text-base text-[#61442E]">
-              I am a <strong className="text-[#2E1E14]">hands-on learner</strong>. Rather than memorizing framework documentation in isolation, I learn technologies by building real things: from a bakery ordering system in Vue (<strong className="text-[#7F5E42]">Crust &amp; Crumbs</strong>), to a hackathon queue management platform in the MERN stack (<strong className="text-[#7F5E42]">Queueless</strong>), to cross-platform mobile utilities in Flutter.
+              I am a <strong className="text-[#2E1E14]">hands-on learner</strong>. Rather than memorizing framework documentation in isolation, I learn technologies by building real things: from an artisanal bakery ordering system (<strong className="text-[#7F5E42]">Crust &amp; Crumbs</strong>), to a hackathon queue management platform in the MERN stack (<strong className="text-[#7F5E42]">Queueless</strong>), to cross-platform mobile utilities in Flutter.
             </p>
 
             {/* Quote callout */}

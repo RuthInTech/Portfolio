@@ -4,21 +4,15 @@ import { getDbStatus } from '../config/db.js';
 
 const router = express.Router();
 
-// In-memory fallback storage
-const memoryContacts = [
-  {
-    _id: 'sample-1',
-    name: 'Addis Tech Community',
-    email: 'community@addistech.et',
-    subject: 'Hackathon Mentorship & Showcase',
-    message: 'Loved your Queueless project concept! We would love to have you present at our next student developer meet.',
-    coffeeRoast: 'Yirgacheffe (Floral & Bright)',
-    status: 'read',
-    createdAt: new Date(Date.now() - 86400000).toISOString(),
-  },
-];
+// In-memory fallback storage in case database is temporarily offline
+const memoryContacts = [];
 
-// POST /api/contact - Submit new contact message
+/**
+ * ☕ MERN CONTACT ROUTES
+ * Contact form messages are stored in MongoDB Atlas.
+ */
+
+// POST /api/contact - Submit new contact message to MongoDB
 router.post('/', async (req, res) => {
   try {
     const { name, email, subject, message, coffeeRoast } = req.body;
@@ -55,22 +49,30 @@ router.post('/', async (req, res) => {
       memoryContacts.unshift(savedContact);
     }
 
+    console.log(`\n======================================================`);
+    console.log(`📥 [NEW CONTACT MESSAGE STORED IN ${dbStatus.connected ? 'MONGODB' : 'IN-MEMORY'}]`);
+    console.log(`From:    ${name} <${email}>`);
+    console.log(`Subject: ${subject || 'General Inquiry'}`);
+    console.log(`Coffee:  ${coffeeRoast || 'Yirgacheffe'}`);
+    console.log(`Message: ${message}`);
+    console.log(`======================================================\n`);
+
     res.status(201).json({
       success: true,
-      message: 'Message received! Thank you for reaching out to Ruth.',
-      persistedTo: dbStatus.connected ? 'MongoDB' : 'Memory Store (Add MONGODB_URI to server/.env to persist permanently)',
+      message: 'Thank you! Your message has been saved successfully.',
+      persistedTo: dbStatus.connected ? 'MongoDB' : 'In-Memory Store',
       data: savedContact,
     });
   } catch (error) {
     console.error('Contact submission error:', error);
     res.status(500).json({
       success: false,
-      error: error.message || 'Server error while sending message',
+      error: error.message || 'Server error while saving contact message.',
     });
   }
 });
 
-// GET /api/contact - List received messages
+// GET /api/contact - View all received contact messages (Newest first)
 router.get('/', async (req, res) => {
   try {
     const dbStatus = getDbStatus();
@@ -80,7 +82,7 @@ router.get('/', async (req, res) => {
         success: true,
         source: 'MongoDB',
         count: contacts.length,
-        data: contacts,
+        contacts,
       });
     }
 
@@ -88,8 +90,29 @@ router.get('/', async (req, res) => {
       success: true,
       source: 'Memory Store',
       count: memoryContacts.length,
-      data: memoryContacts,
+      contacts: memoryContacts,
     });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// DELETE /api/contact/:id - Delete a contact message
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const dbStatus = getDbStatus();
+
+    if (dbStatus.connected) {
+      await Contact.findByIdAndDelete(id);
+      return res.json({ success: true, message: 'Message deleted from MongoDB.' });
+    }
+
+    const index = memoryContacts.findIndex((c) => c._id === id);
+    if (index !== -1) {
+      memoryContacts.splice(index, 1);
+    }
+    res.json({ success: true, message: 'Message deleted from memory store.' });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }

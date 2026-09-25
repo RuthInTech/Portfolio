@@ -56,7 +56,7 @@ export default function Hackathons() {
                 Ready for Hackathon Teams &amp; Sprints
               </div>
               <p className="text-xs text-[#61442E]">
-                Need a frontend developer who can wireframe in Figma, build the UI in React/Vue/Flutter, and help pitch the product? I'm always open to collaborating!
+                Need a frontend developer who can wireframe in Figma, build the UI in React or Flutter, and help pitch the product? I'm always open to collaborating!
               </p>
             </div>
           </div>

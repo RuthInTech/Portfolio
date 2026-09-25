@@ -29,18 +29,18 @@ export const defaultProjects = [
   {
     slug: 'crust-and-crumbs',
     title: 'Crust & Crumbs',
-    subtitle: 'Bakery Ordering Prototype — From Figma to Vue',
+    subtitle: 'Bakery Ordering Prototype — From Figma to Code',
     category: 'Internship',
-    description: 'A cozy, visually appealing bakery ordering prototype developed during an internship assignment. Translates handcrafted Figma UI/UX designs into a snappy, responsive Vue.js + Pinia web app.',
-    fullDescription: 'Created as an end-to-end frontend challenge: taking product requirements and turning them into an artisanal e-commerce experience. Ruth designed the complete aesthetic in Figma — warm bakery tones, tactile cards, intuitive cart drawers — and implemented every interaction in Vue 3 with Pinia state management.',
+    description: 'A cozy, visually appealing bakery ordering prototype developed during an internship assignment. Translates handcrafted Figma UI/UX designs into a snappy, responsive web app.',
+    fullDescription: 'Created as an end-to-end frontend challenge: taking product requirements and turning them into an artisanal e-commerce experience. Ruth designed the complete aesthetic in Figma — warm bakery tones, tactile cards, intuitive cart drawers — and implemented every interaction with modular component architecture.',
     keyFeatures: [
       'Artisanal bakery hero and seasonal showcase',
       'Category-based menu browsing and real-time search',
-      'Pinia-powered reactive shopping cart with live item counts and total calculation',
+      'Reactive shopping cart with live item counts and total calculation',
       'Smooth drawer transitions and tactile micro-interactions',
       'Fully responsive navigation tailored for mobile food ordering'
     ],
-    technologies: ['Vue.js', 'Pinia', 'JavaScript', 'Figma', 'Vite', 'CSS3'],
+    technologies: ['React', 'JavaScript', 'Tailwind CSS', 'Figma', 'Vite', 'CSS3'],
     githubUrl: 'https://github.com/RuthInTech',
     liveUrl: 'https://internship-prototype-ashy.vercel.app/',
     figmaUrl: '',
@@ -49,7 +49,7 @@ export const defaultProjects = [
     thumbnail: 'crust-and-crumbs',
     highlights: [
       'UI/UX Design in Figma to Pixel-Perfect Code',
-      'State Management with Pinia Store',
+      'Reactive Cart & Component State Architecture',
       'Deployed on Vercel'
     ]
   },

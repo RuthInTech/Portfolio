@@ -8,7 +8,7 @@ let memoryCoffeeNotes = [
   {
     _id: 'buna-1',
     senderName: 'Yared M.',
-    message: 'Loved the Crust & Crumbs bakery prototype! The Vue + Pinia implementation was so smooth.',
+    message: 'Loved the Crust & Crumbs bakery prototype! The frontend and cart implementation was so smooth.',
     originRoast: 'Yirgacheffe',
     cupsBrewed: 2,
     createdAt: new Date(Date.now() - 3600000 * 20).toISOString(),

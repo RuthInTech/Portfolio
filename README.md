@@ -13,7 +13,7 @@ Designed with a warm **Ethiopian Coffee aesthetic** (rich espresso `#2E1E14`, st
 Ruth sits at the intersection of:
 **Frontend Engineering × UI/UX Craft × Product Thinking**
 
-She translates handcrafted Figma wireframes and design systems directly into pixel-precise, responsive, and performant code across **React, Vue, the MERN stack, and Flutter**.
+She translates handcrafted Figma wireframes and design systems directly into pixel-precise, responsive, and performant code across **React, the MERN stack, and Flutter**.
 
 ---
 
@@ -46,7 +46,7 @@ She translates handcrafted Figma wireframes and design systems directly into pix
 
 4. **Featured Projects with Case Study Modals**:
    - **Pick One Cause**: Social-impact cause discovery and engagement platform
-   - **Crust & Crumbs**: Artisanal bakery ordering prototype (Figma → Vue.js + Pinia, deployed live on Vercel)
+   - **Crust & Crumbs**: Artisanal bakery ordering prototype (Figma → React + Tailwind, deployed live on Vercel)
    - **Queueless**: MERN stack hackathon physical queue manager with virtual tickets
    - **Flutter Weather App**: Live weather forecast app consuming OpenWeather API
    - **BMI Calculator**: Open-source Flutter mobile utility with tactile sliders
@@ -56,7 +56,7 @@ She translates handcrafted Figma wireframes and design systems directly into pix
    - Honest showcase of ongoing learning repos (Express APIs, MongoDB schemas, EJS templates, Figma design systems)
 
 6. **Design + Development (The Bridge)**:
-   - Interactive comparison stage: Figma design tokens & layout frames vs. Production React/Vue implementation
+   - Interactive comparison stage: Figma design tokens & layout frames vs. Production React implementation
 
 7. **Experience Timeline**:
    - Flutter Developer Intern — *Sof Omar Technologies*

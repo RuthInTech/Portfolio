@@ -117,7 +117,7 @@ export default function Projects() {
             <div className="flex items-center justify-between pb-2 border-b border-[#7F5E42]/60">
               <div className="flex items-center gap-2">
                 <span className="font-serif font-bold text-xs tracking-wide text-[#E7D7C1]">Crust &amp; Crumbs</span>
-                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#C88346] text-[#2E1E14] font-bold">Vue 3 + Pinia</span>
+                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#C88346] text-[#2E1E14] font-bold">React + Tailwind</span>
               </div>
               <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-[#7F5E42]/50 text-[10px]">
                 <ShoppingBag className="w-3 h-3 text-[#E09A55]" />
@@ -146,7 +146,7 @@ export default function Projects() {
 
             <div className="flex items-center justify-between text-[10px] text-[#BA9B7B]">
               <span>Live on Vercel</span>
-              <span className="text-[#E09A55] font-medium">Figma → Vue Prototype</span>
+              <span className="text-[#E09A55] font-medium">Figma → Code Prototype</span>
             </div>
           </div>
         );
