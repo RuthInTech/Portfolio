@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Coffee, Sparkles, Send, Heart, Flame, MessageSquare, CheckCircle2 } from 'lucide-react';
 import { ethiopianRoasts } from '../data/portfolioData';
+import CoffeePourVisual from './CoffeePourVisual';
 
 export default function BunaCorner() {
   const [selectedRoast, setSelectedRoast] = useState(ethiopianRoasts[0]);
@@ -106,6 +107,14 @@ export default function BunaCorner() {
           
           {/* Left Column: Interactive Brewing Form & Roast Selector */}
           <div className="lg:col-span-6 space-y-6">
+            
+            {/* ☕ Interactive Ethiopian Jebena Pouring Liquid Coffee */}
+            <CoffeePourVisual
+              selectedRoast={selectedRoast}
+              onSelectRoast={setSelectedRoast}
+              roasts={ethiopianRoasts}
+            />
+
             <div className="p-6 sm:p-7 rounded-3xl bg-[#FAF6F0] border border-[#E2D3C0] shadow-warm space-y-6">
               
               <div className="flex items-center justify-between pb-3 border-b border-[#E2D3C0]">

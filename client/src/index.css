@@ -70,3 +70,102 @@
 .animate-steam-3 {
   animation: steamPulse 2.5s ease-in-out infinite 1.6s;
 }
+
+/* ☕ Pouring Liquid Coffee Animations */
+@keyframes coffeeStreamFlow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -40;
+  }
+}
+
+@keyframes liquidWaveMove {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-14px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes jebenaPouring {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-4deg);
+  }
+}
+
+@keyframes splashDrop1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  30% {
+    transform: translate(-7px, -14px) scale(1);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translate(-12px, -2px) scale(0.5);
+    opacity: 0.3;
+  }
+}
+
+@keyframes splashDrop2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  40% {
+    transform: translate(9px, -16px) scale(1.1);
+    opacity: 0.9;
+  }
+  85% {
+    transform: translate(14px, -3px) scale(0.5);
+    opacity: 0.3;
+  }
+}
+
+@keyframes surfaceRipple {
+  0% {
+    r: 3;
+    opacity: 0.9;
+  }
+  100% {
+    r: 22;
+    opacity: 0;
+  }
+}
+
+.animate-stream-flow {
+  stroke-dasharray: 14 10;
+  animation: coffeeStreamFlow 0.55s linear infinite;
+}
+
+.animate-liquid-wave {
+  animation: liquidWaveMove 3.5s ease-in-out infinite;
+}
+
+.animate-jebena-pour {
+  transform-origin: 30% 70%;
+  animation: jebenaPouring 4s ease-in-out infinite;
+}
+
+.animate-splash-1 {
+  animation: splashDrop1 1.2s ease-out infinite;
+}
+
+.animate-splash-2 {
+  animation: splashDrop2 1.4s ease-out infinite 0.45s;
+}
+
+.animate-ripple {
+  animation: surfaceRipple 1.6s cubic-bezier(0.1, 0.7, 0.4, 1) infinite;
+}
+
